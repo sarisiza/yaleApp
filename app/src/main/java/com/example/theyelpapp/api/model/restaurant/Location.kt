@@ -19,7 +19,7 @@ data class Location(
     @SerializedName("country")
     val country: String? = null,
     @SerializedName("display_address")
-    val displayAddress: List<String?>? = null,
+    val displayAddress: List<String>? = null,
     @SerializedName("state")
     val state: String? = null,
     @SerializedName("zip_code")
