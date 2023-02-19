@@ -11,7 +11,7 @@ data class Businesses(
     @SerializedName("alias")
     val alias: String? = null,
     @SerializedName("categories")
-    val categories: List<Category?>? = null,
+    val categories: List<Category>? = null,
     @SerializedName("coordinates")
     val coordinates: Coordinates? = null,
     @SerializedName("display_phone")
@@ -37,7 +37,7 @@ data class Businesses(
     @SerializedName("review_count")
     val reviewCount: Int? = null,
     @SerializedName("transactions")
-    val transactions: List<String?>? = null,
+    val transactions: List<String>? = null,
     @SerializedName("url")
     val url: String? = null
 )

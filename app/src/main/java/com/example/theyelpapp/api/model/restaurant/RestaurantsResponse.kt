@@ -10,8 +10,8 @@ import com.google.gson.annotations.SerializedName
 data class RestaurantsResponse(
     @SerializedName("businesses")
     val businesses: List<Businesses?>? = null,
-    @SerializedName("region")
-    val region: Region? = null,
+//    @SerializedName("region")
+//    val region: Region? = null,
     @SerializedName("total")
     val total: Int? = null
 )
