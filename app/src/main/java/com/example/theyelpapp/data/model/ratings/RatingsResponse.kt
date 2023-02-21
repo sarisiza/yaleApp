@@ -1,4 +1,4 @@
-package com.example.theyelpapp.api.model.ratings
+package com.example.theyelpapp.data.model.ratings
 
 
 import com.google.gson.annotations.SerializedName

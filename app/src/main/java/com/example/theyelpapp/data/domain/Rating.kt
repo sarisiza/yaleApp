@@ -1,6 +1,6 @@
-package com.example.theyelpapp.api.domain
+package com.example.theyelpapp.data.domain
 
-import com.example.theyelpapp.api.model.ratings.Review
+import com.example.theyelpapp.data.model.ratings.Review
 
 /**
  * Data class that defines a rating
