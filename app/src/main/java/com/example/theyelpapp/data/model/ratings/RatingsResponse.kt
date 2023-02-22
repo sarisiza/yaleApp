@@ -11,7 +11,7 @@ data class RatingsResponse(
     @SerializedName("possible_languages")
     val possibleLanguages: List<String?>? = null,
     @SerializedName("reviews")
-    val reviews: List<Review?>? = null,
+    val reviews: List<Review>? = null,
     @SerializedName("total")
     val total: Int? = null
 )
