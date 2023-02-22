@@ -1,6 +1,6 @@
-package com.example.theyelpapp.api.domain
+package com.example.theyelpapp.data.domain
 
-import com.example.theyelpapp.api.model.restaurant.Businesses
+import com.example.theyelpapp.data.model.restaurant.Businesses
 
 
 /**
