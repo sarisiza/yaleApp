@@ -1,11 +1,10 @@
 package com.example.theyelpapp.di
 
 import android.content.Context
-import android.net.ConnectivityManager
-import com.example.theyelpapp.data.service.CacheInterceptor
-import com.example.theyelpapp.data.service.ForceCacheInterceptor
-import com.example.theyelpapp.data.service.RequestInterceptor
-import com.example.theyelpapp.data.service.YelpApi
+import com.example.theyelpapp.datalayer.service.CacheInterceptor
+import com.example.theyelpapp.datalayer.service.ForceCacheInterceptor
+import com.example.theyelpapp.datalayer.service.RequestInterceptor
+import com.example.theyelpapp.datalayer.service.YelpApi
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides

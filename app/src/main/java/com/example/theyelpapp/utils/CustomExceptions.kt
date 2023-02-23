@@ -6,3 +6,4 @@ class InternetConnectionException(message: String = "No internet connection"): E
 class LocationFailureException(message: String = "Location failed"): Exception(message)
 class NoResponseException(message: String = "Response is null"): Exception(message)
 class NetworkCallFailureException(message: String): Exception(message)
+class NoRestaurantException(message: String = "No restaurant selected"): Exception(message)
