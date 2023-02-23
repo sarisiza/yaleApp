@@ -1,7 +1,7 @@
 package com.example.theyelpapp.di
 
-import com.example.theyelpapp.data.service.NetworkRepository
-import com.example.theyelpapp.data.service.NetworkRepositoryImpl
+import com.example.theyelpapp.datalayer.service.NetworkRepository
+import com.example.theyelpapp.datalayer.service.NetworkRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
