@@ -39,13 +39,16 @@ class YelpViewModel @Inject constructor(
         MutableLiveData(UIState.LOADING)
     val restaurantRatings: LiveData<UIState<List<Rating>>> get() = _restaurantRatings
 
+    private val _fragmentState: MutableLiveData<Boolean> = MutableLiveData(false)
+    val fragmentState: LiveData<Boolean> get() = _fragmentState
+
     fun getIntentView(intents: ViewIntents){
         when(intents){
             ViewIntents.RESTAURANT_LIST -> getRestaurantsNearMe()
-            ViewIntents.REQUEST_PERMISSION -> {}
-            ViewIntents.RESTAURANT_DETAILS -> {}
             ViewIntents.RESTAURANT_RATINGS -> getRestaurantRatings(selectedRestaurant?.id)
             ViewIntents.GET_LOCATION -> getUserLocation()
+            ViewIntents.CONFIGURATION_CHANGE -> {updateFragmentState(true)}
+            ViewIntents.START_FRAGMENT -> {updateFragmentState(false)}
         }
     }
 
@@ -92,6 +95,10 @@ class YelpViewModel @Inject constructor(
         } catch (e: Exception){
             _restaurantRatings.postValue(UIState.ERROR(e))
         }
+    }
+
+    private fun updateFragmentState(state: Boolean){
+        _fragmentState.postValue(state)
     }
 
 }
