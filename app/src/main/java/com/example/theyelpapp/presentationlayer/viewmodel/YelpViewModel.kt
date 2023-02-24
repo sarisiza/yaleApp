@@ -22,7 +22,6 @@ class YelpViewModel @Inject constructor(
 ): ViewModel() {
 
     var locationPermissionEnabled: Boolean = false
-    var locationEnabled: Boolean = false
 
     private val _locationState: MutableLiveData<UIState<Location>> =
         MutableLiveData(UIState.LOADING)
@@ -53,8 +52,7 @@ class YelpViewModel @Inject constructor(
     private fun getUserLocation(){
         viewModelScope.launch {
             yelpUseCases.getLocation(
-                locationPermissionEnabled,
-                locationEnabled
+                locationPermissionEnabled
             ).collect{
                 _locationState.postValue(it)
             }
