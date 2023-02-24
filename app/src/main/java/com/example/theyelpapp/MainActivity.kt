@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.theyelpapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
@@ -23,7 +25,6 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.frag_container) as NavHostFragment
         //Navigation between fragments
         setupActionBarWithNavController(navHost.navController)
-
 
     }
 

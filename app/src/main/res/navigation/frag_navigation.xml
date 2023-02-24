@@ -19,9 +19,23 @@
     <fragment
         android:id="@+id/frag_det"
         android:name="com.example.theyelpapp.presentationlayer.view.RestaurantFragment"
-        tools:layout="@layout/restaurant_details"
+        tools:layout="@layout/restaurant_fragment"
         android:label="Details Fragment">
 
+        <action
+            android:id="@+id/action_frag_det_to_frag_ratings2"
+            app:destination="@id/frag_ratings" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/frag_ratings"
+        android:name="com.example.theyelpapp.presentationlayer.view.RatingsFragment"
+        tools:layout="@layout/fragment_restaurants_list"
+        android:label="Ratings Fragment">
+
+        <action
+            android:id="@+id/action_frag_ratings_to_frag_det2"
+            app:destination="@id/frag_det" />
     </fragment>
 
 </navigation>

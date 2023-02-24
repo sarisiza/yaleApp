@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
@@ -35,8 +35,7 @@
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_restaurant_name"
-            android:layout_margin="5dp"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_restaurant_name" />
 
         <ImageView
             android:id="@id/iv_restaurant_image"
@@ -46,8 +45,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_price"
-            android:contentDescription="@string/iv_desc_restaurant_image"
-            android:layout_margin="10dp"/>
+            android:contentDescription="@string/iv_desc_restaurant_image" />
 
         <RatingBar
             android:id="@+id/rb_rating"
@@ -59,7 +57,7 @@
             android:stepSize="1"
             android:isIndicator="true"
             style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_margin="10dp"/>
+            android:theme="@style/RatingBar"/>
 
         <TextView
             android:id="@+id/tv_distance"

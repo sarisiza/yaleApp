@@ -11,4 +11,6 @@
     <color name="green_bg">#c7d4c7</color>
     <color name="green_bar">#dbf5da</color>
     <color name="green_card">#8cbaa1</color>
+    <color name="lightGrey">#c3c9c6</color>
+    <color name="duskYellow">#f0e805</color>
 </resources>

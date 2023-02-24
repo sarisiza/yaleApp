@@ -20,7 +20,8 @@
             app:layout_constraintTop_toTopOf="parent"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_margin="10dp"
-            android:elevation="8dp"/>
+            android:elevation="8dp"
+            android:theme="@style/RatingBar"/>
 
         <TextView
             android:id="@+id/tv_time_created"
