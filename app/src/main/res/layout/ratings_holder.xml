@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="16dp"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/green_bg"
+        android:padding="16dp">
+
+        <RatingBar
+            android:id="@+id/rb_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_margin="10dp"
+            android:elevation="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_time_created"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_text_time_created"
+            app:layout_constraintStart_toEndOf="@id/rb_rating"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="10dp"
+            android:textSize="12sp"
+            android:elevation="8dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_ratings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rb_rating"
+            android:layout_margin="10dp"
+            android:text="@string/tv_text_user_rating"
+            android:background="@color/purple_200"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:elevation="8dp"
+            android:textSize="16sp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

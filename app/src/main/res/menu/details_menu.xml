@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:enabled="true"
+        android:id="@+id/det_restaurant"
+        android:title="@string/it_title_restaurant"/>
+
+    <item
+        android:enabled="true"
+        android:id="@+id/det_ratings"
+        android:title="@string/it_title_ratings"/>
+
+</menu>

@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">TheYelpApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_text_restaurants_near_you">Restaurants Near You</string>
+    <string name="tv_text_restaurant_name">Restaurant Name</string>
+    <string name="tv_text_price">$$$</string>
+    <string name="tv_text_phone_number">phone number</string>
+    <string name="tv_text_address">Address</string>
+    <string name="it_title_restaurant">Restaurant</string>
+    <string name="it_title_ratings">Ratings</string>
+    <string name="iv_desc_restaurant_image">Restaurant Image</string>
+    <string name="tv_text_distance">Distance</string>
+    <string name="tv_text_user_name">User name</string>
+    <string name="tv_text_user_rating">The rating of the user</string>
+    <string name="tv_text_time_created">Time created</string>
 </resources>
