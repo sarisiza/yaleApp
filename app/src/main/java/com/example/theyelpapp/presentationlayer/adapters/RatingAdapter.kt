@@ -1,9 +1,15 @@
 package com.example.theyelpapp.presentationlayer.adapters
 
 import android.view.LayoutInflater
+import android.view.View
+import android.view.View.LAYOUT_DIRECTION_RTL
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LAYOUT_DIRECTION_LTR
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager.LayoutParams
 import com.example.theyelpapp.R
 import com.example.theyelpapp.databinding.RatingsHolderBinding
 import com.example.theyelpapp.databinding.UserHolderBinding
@@ -29,24 +35,38 @@ class RatingAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        if(viewType == 0){ //user
-            UserViewHolder(
-                UserHolderBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-            )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val lp: LayoutParams
+        val viewUser = UserHolderBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false)
+        val viewRating = RatingsHolderBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        /*val lm: StaggeredGridLayoutManager =
+            ((parent as RecyclerView).layoutManager as StaggeredGridLayoutManager).apply {
+                invalidateSpanAssignments()
+            }*/
+        return if(viewType == 0){ //user
+            lp = (viewUser.root.layoutParams as LayoutParams).apply {
+                width = parent.width/4
+                isFullSpan = true
+                layoutDirection = LAYOUT_DIRECTION_RTL
+            }
+            viewUser.root.layoutParams = lp
+            UserViewHolder(viewUser)
         }else{ //rating
-            RatingViewHolder(
-                RatingsHolderBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
-            )
+            lp = (viewRating.root.layoutParams as LayoutParams).apply {
+                width = parent.width*3/4
+                isFullSpan = true
+            }
+            viewRating.root.layoutParams = lp
+            RatingViewHolder(viewRating)
         }
+    }
 
 
     override fun getItemCount() = itemSet.size
@@ -81,6 +101,7 @@ class UserViewHolder(
             .get()
             .load(item.userImg)
             .transform(CropCircleTransformation())
+            .resize(120,0)
             .placeholder(R.drawable.baseline_person_24)
             .error(R.drawable.baseline_person_24)
             .into(binding.ivUserPic)

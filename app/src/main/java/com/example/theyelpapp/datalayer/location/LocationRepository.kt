@@ -28,6 +28,7 @@ class LocationRepositoryImpl @Inject constructor(
             while (!task.isComplete){
                 Log.d(TAG, "getLocationData: waiting")
             }
+            Log.d(TAG, "getLocationData: ${task.result}")
             return task.result
         }
         return null

@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentationlayer.view.RatingsFragment"
     android:background="@color/green_bg"
-    android:padding="16dp"
     android:orientation="vertical">
 
     <include
