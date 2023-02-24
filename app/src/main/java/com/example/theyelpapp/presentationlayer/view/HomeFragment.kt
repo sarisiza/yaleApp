@@ -1,22 +1,25 @@
 package com.example.theyelpapp.presentationlayer.view
 
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.theyelpapp.R
 import com.example.theyelpapp.databinding.FragmentRestaurantsListBinding
 import com.example.theyelpapp.presentationlayer.adapters.RestaurantAdapter
 import com.example.theyelpapp.utils.UIState
 import com.example.theyelpapp.utils.ViewIntents
 
+private const val TAG = "HomeFragment"
 class HomeFragment : BaseFragment() {
 
     private val binding by lazy {
@@ -30,22 +33,17 @@ class HomeFragment : BaseFragment() {
         }
     }
 
+    private lateinit var permission: ArrayList<String>
+
+    private lateinit var swipeToRefreshLayout: SwipeRefreshLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val permission = arrayListOf(
+        permission = arrayListOf(
             android.Manifest.permission.ACCESS_COARSE_LOCATION,
             android.Manifest.permission.ACCESS_FINE_LOCATION
         )
-        permission.forEach {
-            if(checkSelfPermission(requireContext(),it) != PackageManager.PERMISSION_GRANTED){
-                requestPermissions(permission.toTypedArray(),900)
-            }
-            else{
-                yelpViewModel.locationPermissionEnabled = true
-                yelpViewModel.getIntentView(ViewIntents.GET_LOCATION)
-            }
-        }
 
     }
 
@@ -53,6 +51,8 @@ class HomeFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        swipeToRefreshLayout = binding.swipeLayout
 
         binding.tvListTitle.text = "Restaurants Near Me"
 
@@ -97,6 +97,24 @@ class HomeFragment : BaseFragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        yelpViewModel.fragmentState.observe(viewLifecycleOwner){
+            Log.d(TAG, "onResume: $it")
+            if(!it){
+                permission.forEach {
+                    if(checkSelfPermission(requireContext(),it) != PackageManager.PERMISSION_GRANTED){
+                        requestPermissions(permission.toTypedArray(),900)
+                    }
+                    else{
+                        yelpViewModel.locationPermissionEnabled = true
+                        yelpViewModel.getIntentView(ViewIntents.GET_LOCATION)
+                    }
+                }
+            }
+        }
+    }
+
     @Deprecated("")
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -111,5 +129,7 @@ class HomeFragment : BaseFragment() {
             }
         }
     }
+
+
 
 }

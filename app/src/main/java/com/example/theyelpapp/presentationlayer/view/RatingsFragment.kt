@@ -29,8 +29,6 @@ class RatingsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        yelpViewModel.getIntentView(ViewIntents.RESTAURANT_RATINGS)
-
         binding.rvRatingsList.apply {
             adapter = ratingsAdapter
             layoutManager = StaggeredGridLayoutManager(
@@ -66,6 +64,15 @@ class RatingsFragment : BaseFragment() {
 
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        yelpViewModel.fragmentState.observe(viewLifecycleOwner){
+            if(!it){
+                yelpViewModel.getIntentView(ViewIntents.RESTAURANT_RATINGS)
+            }
+        }
     }
 
 }

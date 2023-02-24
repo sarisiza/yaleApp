@@ -26,7 +26,7 @@ class LocationRepositoryImpl @Inject constructor(
         if(locationIsEnabled()){
             val task = fusedLocation.lastLocation
             while (!task.isComplete){
-                Log.d(TAG, "getLocationData: waiting")
+                Thread.sleep(500)
             }
             Log.d(TAG, "getLocationData: ${task.result}")
             return task.result

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.theyelpapp.R
 import com.example.theyelpapp.databinding.RestaurantFragmentBinding
+import com.example.theyelpapp.utils.ViewIntents
 import com.squareup.picasso.Picasso
 
 class RestaurantFragment : BaseFragment() {
