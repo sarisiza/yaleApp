@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.LocationManager
 import android.net.ConnectivityManager
-import androidx.core.content.getSystemService
-import com.example.theyelpapp.LocationService
 import com.example.theyelpapp.datalayer.location.LocationRepository
 import com.example.theyelpapp.datalayer.service.NetworkRepository
 import com.example.theyelpapp.usecaseslayer.GetLocationUseCase

@@ -1,18 +1,11 @@
 package com.example.theyelpapp.usecaseslayer
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.location.Location
-import android.location.LocationManager
-import android.util.Log
-import com.example.theyelpapp.LocationService
 import com.example.theyelpapp.datalayer.location.LocationRepository
 import com.example.theyelpapp.utils.LocationFailureException
-import com.example.theyelpapp.utils.LocationRequiredException
 import com.example.theyelpapp.utils.PermissionsRequiredException
 import com.example.theyelpapp.utils.UIState
-import com.google.android.gms.location.FusedLocationProviderClient
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

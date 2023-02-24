@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.theyelpapp.R
 import com.example.theyelpapp.databinding.RatingsFragmentBinding
 import com.example.theyelpapp.presentationlayer.adapters.RatingAdapter
@@ -31,7 +33,10 @@ class RatingsFragment : BaseFragment() {
 
         binding.rvRatingsList.apply {
             adapter = ratingsAdapter
-            layoutManager = GridLayoutManager(requireContext(),2)
+            layoutManager = StaggeredGridLayoutManager(
+                2,
+                StaggeredGridLayoutManager.VERTICAL
+            )
         }
 
         binding.inBar.barDetailsBar.setOnItemSelectedListener {
