@@ -1,11 +1,8 @@
 package com.example.theyelpapp.presentationlayer.view
 
 import android.content.pm.PackageManager
-import android.content.res.Configuration
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,41 +53,19 @@ class HomeFragment : BaseFragment() {
 
         binding.tvListTitle.text = "Restaurants Near Me"
 
-        yelpViewModel.locationState.observe(viewLifecycleOwner){state ->
-            when(state){
-                is UIState.ERROR -> {
-                    showError(state.e.localizedMessage){
-
-                    }
-                }
-                UIState.LOADING -> {}
-                is UIState.SUCCESS -> {
-                    yelpViewModel.currentLocation = state.response
-                    yelpViewModel.getIntentView(ViewIntents.RESTAURANT_LIST)
-                }
-            }
-        }
-
-        yelpViewModel.restaurantsNearMe.observe(viewLifecycleOwner){state ->
-            when(state){
-                is UIState.ERROR -> {
-                    showError(state.e.localizedMessage){
-
-                    }
-                }
-                UIState.LOADING -> {}
-                is UIState.SUCCESS -> {
-                    restaurantAdapter.updateRestaurants(state.response)
-                }
-            }
-        }
-
         binding.rvRestaurantsList.apply {
             adapter = restaurantAdapter
             layoutManager = LinearLayoutManager(
                 requireContext(),
                 LinearLayoutManager.VERTICAL,
                 false)
+        }
+
+        updateList()
+
+        swipeToRefreshLayout.setOnRefreshListener {
+            swipeToRefreshLayout.isRefreshing = false
+            yelpViewModel.getIntentView(ViewIntents.GET_LOCATION)
         }
 
         // Inflate the layout for this fragment
@@ -100,7 +75,6 @@ class HomeFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         yelpViewModel.fragmentState.observe(viewLifecycleOwner){
-            Log.d(TAG, "onResume: $it")
             if(!it){
                 permission.forEach {
                     if(checkSelfPermission(requireContext(),it) != PackageManager.PERMISSION_GRANTED){
@@ -126,6 +100,37 @@ class HomeFragment : BaseFragment() {
             grantResults.forEach {
                 yelpViewModel.locationPermissionEnabled = it == PackageManager.PERMISSION_GRANTED
                 yelpViewModel.getIntentView(ViewIntents.GET_LOCATION)
+            }
+        }
+    }
+
+    fun updateList(){
+        yelpViewModel.locationState.observe(viewLifecycleOwner){state ->
+            when(state){
+                is UIState.ERROR -> {
+                    showError(state.e.localizedMessage){
+                        yelpViewModel.getIntentView(ViewIntents.GET_LOCATION)
+                    }
+                }
+                UIState.LOADING -> {}
+                is UIState.SUCCESS -> {
+                    yelpViewModel.currentLocation = state.response
+                    yelpViewModel.getIntentView(ViewIntents.RESTAURANT_LIST)
+                }
+            }
+        }
+
+        yelpViewModel.restaurantsNearMe.observe(viewLifecycleOwner){state ->
+            when(state){
+                is UIState.ERROR -> {
+                    showError(state.e.localizedMessage){
+                        yelpViewModel.getIntentView(ViewIntents.RESTAURANT_LIST)
+                    }
+                }
+                UIState.LOADING -> {}
+                is UIState.SUCCESS -> {
+                    restaurantAdapter.updateRestaurants(state.response)
+                }
             }
         }
     }
