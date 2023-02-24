@@ -3,12 +3,12 @@
 
     <item
         android:enabled="true"
-        android:id="@+id/det_restaurant"
+        android:id="@+id/frag_det"
         android:title="@string/it_title_restaurant"/>
 
     <item
         android:enabled="true"
-        android:id="@+id/det_ratings"
+        android:id="@+id/frag_ratings"
         android:title="@string/it_title_ratings"/>
 
 </menu>

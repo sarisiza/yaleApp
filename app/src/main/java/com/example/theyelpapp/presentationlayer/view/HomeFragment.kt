@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.theyelpapp.R
 import com.example.theyelpapp.databinding.FragmentRestaurantsListBinding
 import com.example.theyelpapp.presentationlayer.adapters.RestaurantAdapter
@@ -86,7 +87,10 @@ class HomeFragment : BaseFragment() {
 
         binding.rvRestaurantsList.apply {
             adapter = restaurantAdapter
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.VERTICAL,
+                false)
         }
 
         // Inflate the layout for this fragment

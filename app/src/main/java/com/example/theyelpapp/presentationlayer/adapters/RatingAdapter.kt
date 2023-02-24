@@ -9,6 +9,7 @@ import com.example.theyelpapp.databinding.RatingsHolderBinding
 import com.example.theyelpapp.databinding.UserHolderBinding
 import com.example.theyelpapp.datalayer.domain.Rating
 import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
 class RatingAdapter(
     private val itemSet: MutableList<ViewType> = mutableListOf()
@@ -79,7 +80,7 @@ class UserViewHolder(
         Picasso
             .get()
             .load(item.userImg)
-            .centerCrop()
+            .transform(CropCircleTransformation())
             .placeholder(R.drawable.baseline_person_24)
             .error(R.drawable.baseline_person_24)
             .into(binding.ivUserPic)

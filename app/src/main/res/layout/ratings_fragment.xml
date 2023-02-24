@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentationlayer.view.RatingsFragment"
+    android:background="@color/green_bg"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/in_bar"
+        layout="@layout/top_details_bar"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ratings_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" />
+
+</LinearLayout>

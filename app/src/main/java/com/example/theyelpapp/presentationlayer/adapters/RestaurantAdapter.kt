@@ -10,6 +10,7 @@ import com.example.theyelpapp.databinding.UserHolderBinding
 import com.example.theyelpapp.datalayer.domain.Rating
 import com.example.theyelpapp.datalayer.domain.Restaurant
 import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 
 class RestaurantAdapter(
     private val itemSet: MutableList<Restaurant> = mutableListOf(),
@@ -57,6 +58,7 @@ class RestaurantsViewHolder(
             .load(item.imgUrl)
             .placeholder(R.drawable.ic_image_search_24)
             .error(R.drawable.ic_broken_image_24)
+            .transform(RoundedCornersTransformation(45,20))
             .into(binding.ivRestaurantImage)
         itemView.setOnClickListener {
             item.let(onRestaurantClicked)
