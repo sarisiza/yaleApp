@@ -6,6 +6,7 @@ import android.location.LocationManager
 import android.net.ConnectivityManager
 import androidx.core.content.getSystemService
 import com.example.theyelpapp.LocationService
+import com.example.theyelpapp.datalayer.location.LocationRepository
 import com.example.theyelpapp.datalayer.service.NetworkRepository
 import com.example.theyelpapp.usecaseslayer.GetLocationUseCase
 import com.example.theyelpapp.usecaseslayer.GetRatingsUseCase
@@ -43,13 +44,12 @@ class ApplicationModule {
     @Provides
     @Singleton
     fun providesYelpUseCases(
-        locationManager: LocationManager,
-        @ApplicationContext context: Context,
+        locationRepository: LocationRepository,
         networkRepository: NetworkRepository,
         networkState: NetworkState
     ): YelpUseCases =
         YelpUseCases(
-            GetLocationUseCase(locationManager,context),
+            GetLocationUseCase(locationRepository),
             GetRatingsUseCase(networkRepository,networkState),
             GetRestaurantsUseCase(networkRepository,networkState)
         )

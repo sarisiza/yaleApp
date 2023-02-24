@@ -1,5 +1,7 @@
 package com.example.theyelpapp.di
 
+import com.example.theyelpapp.datalayer.location.LocationRepository
+import com.example.theyelpapp.datalayer.location.LocationRepositoryImpl
 import com.example.theyelpapp.datalayer.service.NetworkRepository
 import com.example.theyelpapp.datalayer.service.NetworkRepositoryImpl
 import dagger.Binds
@@ -15,5 +17,10 @@ abstract class RepositoryModule {
     abstract fun provideNetworkRepository(
         networkRepositoryImpl: NetworkRepositoryImpl
     ): NetworkRepository
+
+    @Binds
+    abstract fun provideLocationRepository(
+        locationRepositoryImpl: LocationRepositoryImpl
+    ): LocationRepository
 
 }

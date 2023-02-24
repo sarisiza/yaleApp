@@ -55,7 +55,6 @@ class RestaurantsViewHolder(
         Picasso
             .get()
             .load(item.imgUrl)
-            .centerCrop()
             .placeholder(R.drawable.ic_image_search_24)
             .error(R.drawable.ic_broken_image_24)
             .into(binding.ivRestaurantImage)
