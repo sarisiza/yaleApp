@@ -1,7 +1,11 @@
 package com.example.theyelpapp.di
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.location.LocationManager
 import android.net.ConnectivityManager
+import androidx.core.content.getSystemService
+import com.example.theyelpapp.LocationService
 import com.example.theyelpapp.datalayer.service.NetworkRepository
 import com.example.theyelpapp.usecaseslayer.GetLocationUseCase
 import com.example.theyelpapp.usecaseslayer.GetRatingsUseCase
@@ -17,6 +21,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+@SuppressLint("ServiceCast")
 @Module
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
@@ -38,14 +43,22 @@ class ApplicationModule {
     @Provides
     @Singleton
     fun providesYelpUseCases(
-        fusedLocation: FusedLocationProviderClient,
+        locationManager: LocationManager,
+        @ApplicationContext context: Context,
         networkRepository: NetworkRepository,
         networkState: NetworkState
     ): YelpUseCases =
         YelpUseCases(
-            GetLocationUseCase(fusedLocation),
+            GetLocationUseCase(locationManager,context),
             GetRatingsUseCase(networkRepository,networkState),
             GetRestaurantsUseCase(networkRepository,networkState)
         )
+
+    @Provides
+    @Singleton
+    fun providesLocationManager(
+        @ApplicationContext context: Context
+    ): LocationManager =
+        context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
 }

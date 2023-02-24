@@ -16,7 +16,7 @@
         android:background="@color/green_bar"/>
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/frag_container"
+        android:id="@+id/frag_container_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:name="androidx.navigation.fragment.NavHostFragment"
