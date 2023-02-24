@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.theyelpapp.R
 import com.example.theyelpapp.databinding.RatingsFragmentBinding
 import com.example.theyelpapp.presentationlayer.adapters.RatingAdapter
@@ -24,10 +25,14 @@ class RatingsFragment : BaseFragment() {
         RatingAdapter()
     }
 
+    private lateinit var swipeToRefreshLayout: SwipeRefreshLayout
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        swipeToRefreshLayout = binding.swipeLayout
 
         binding.rvRatingsList.apply {
             adapter = ratingsAdapter
@@ -48,18 +53,11 @@ class RatingsFragment : BaseFragment() {
             }
         }
 
-        yelpViewModel.restaurantRatings.observe(viewLifecycleOwner){state ->
-            when(state){
-                is UIState.ERROR -> {
-                    showError(state.e.localizedMessage){
-                        yelpViewModel.getIntentView(ViewIntents.RESTAURANT_RATINGS)
-                    }
-                }
-                UIState.LOADING -> {}
-                is UIState.SUCCESS -> {
-                    ratingsAdapter.updateRatings(state.response)
-                }
-            }
+        updateList()
+
+        swipeToRefreshLayout.setOnRefreshListener {
+            swipeToRefreshLayout.isRefreshing = false
+            yelpViewModel.getIntentView(ViewIntents.RESTAURANT_RATINGS)
         }
 
         // Inflate the layout for this fragment
@@ -71,6 +69,22 @@ class RatingsFragment : BaseFragment() {
         yelpViewModel.fragmentState.observe(viewLifecycleOwner){
             if(!it){
                 yelpViewModel.getIntentView(ViewIntents.RESTAURANT_RATINGS)
+            }
+        }
+    }
+
+    fun updateList(){
+        yelpViewModel.restaurantRatings.observe(viewLifecycleOwner){state ->
+            when(state){
+                is UIState.ERROR -> {
+                    showError(state.e.localizedMessage){
+                        yelpViewModel.getIntentView(ViewIntents.RESTAURANT_RATINGS)
+                    }
+                }
+                UIState.LOADING -> {}
+                is UIState.SUCCESS -> {
+                    ratingsAdapter.updateRatings(state.response)
+                }
             }
         }
     }
