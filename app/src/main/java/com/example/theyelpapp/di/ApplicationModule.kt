@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.LocationManager
 import android.net.ConnectivityManager
+import androidx.room.Room
+import com.example.theyelpapp.datalayer.database.RestaurantDatabase
+import com.example.theyelpapp.datalayer.database.RestaurantsDAO
 import com.example.theyelpapp.datalayer.location.LocationRepository
 import com.example.theyelpapp.datalayer.service.NetworkRepository
 import com.example.theyelpapp.usecaseslayer.GetLocationUseCase
@@ -58,5 +61,23 @@ class ApplicationModule {
         @ApplicationContext context: Context
     ): LocationManager =
         context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+    @Provides
+    @Singleton
+    fun providesDatabase(
+        @ApplicationContext context: Context
+    ): RestaurantDatabase =
+        Room.databaseBuilder(
+            context,
+            RestaurantDatabase::class.java,
+            "restaurants-db"
+        ).build()
+
+    @Provides
+    @Singleton
+    fun providesDao(
+        restaurantDatabase: RestaurantDatabase
+    ): RestaurantsDAO =
+        restaurantDatabase.getRestaurantsDao()
 
 }

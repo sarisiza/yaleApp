@@ -11,6 +11,7 @@ import com.example.theyelpapp.datalayer.domain.Rating
 import com.example.theyelpapp.datalayer.domain.Restaurant
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
+import kotlin.math.roundToInt
 
 class RestaurantAdapter(
     private val itemSet: MutableList<Restaurant> = mutableListOf(),
@@ -52,7 +53,8 @@ class RestaurantsViewHolder(
         binding.tvRestaurantName.text = item.name
         binding.tvPrice.text = item.price
         binding.rbRating.rating = item.rating.toFloat()
-        binding.tvDistance.text = item.distance.toString()
+        val roundedDistance = (item.distance * 100.0).roundToInt()/100.0
+        binding.tvDistance.text = "Distance from you: ${roundedDistance.toString()}"
         Picasso
             .get()
             .load(item.imgUrl)

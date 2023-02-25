@@ -24,7 +24,7 @@ class RestaurantFragment : BaseFragment() {
         binding.tvRestaurantName.text = yelpViewModel.selectedRestaurant?.name
         binding.tvPrice.text = yelpViewModel.selectedRestaurant?.price
         binding.rbRating.rating = yelpViewModel.selectedRestaurant?.rating?.toFloat() ?: 1F
-        binding.tvAddress.text = yelpViewModel.selectedRestaurant?.address.toString()
+        binding.tvAddress.text = yelpViewModel.selectedRestaurant?.address
         binding.tvPhone.text = yelpViewModel.selectedRestaurant?.phone
         Picasso
             .get()
