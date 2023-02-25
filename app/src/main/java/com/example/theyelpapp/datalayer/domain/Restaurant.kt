@@ -21,7 +21,8 @@ data class Restaurant(
     val name: String = "",
     val price: String = "",
     val rating: Double = 0.0,
-    val reviewCount: Int = 0
+    val reviewCount: Int = 0,
+    var isFavorite: Boolean
 )
 
 fun List<Businesses>?.mapToRestaurant(): List<Restaurant>{
@@ -42,7 +43,8 @@ fun List<Businesses>?.mapToRestaurant(): List<Restaurant>{
             it.name ?: "",
             it.price ?: "",
             it.rating ?: 0.0,
-            it.reviewCount ?: 0
+            it.reviewCount ?: 0,
+            false
             )
     }?: emptyList()
 }

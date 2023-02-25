@@ -12,4 +12,8 @@ sealed class ViewIntents{
 
     object START_FRAGMENT: ViewIntents()
 
+    object UPDATE_FAVORITE: ViewIntents()
+
+    object GET_FAVORITES: ViewIntents()
+
 }
