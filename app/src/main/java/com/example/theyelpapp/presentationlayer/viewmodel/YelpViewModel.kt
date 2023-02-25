@@ -42,13 +42,19 @@ class YelpViewModel @Inject constructor(
     private val _fragmentState: MutableLiveData<Boolean> = MutableLiveData(false)
     val fragmentState: LiveData<Boolean> get() = _fragmentState
 
+    private val _favoriteRestaurants: MutableLiveData<UIState<List<Restaurant>>> =
+        MutableLiveData(UIState.LOADING)
+    val favoriteRestaurants: LiveData<UIState<List<Restaurant>>> get() = _favoriteRestaurants
+
     fun getIntentView(intents: ViewIntents){
         when(intents){
             ViewIntents.RESTAURANT_LIST -> getRestaurantsNearMe()
             ViewIntents.RESTAURANT_RATINGS -> getRestaurantRatings(selectedRestaurant?.id)
             ViewIntents.GET_LOCATION -> getUserLocation()
-            ViewIntents.CONFIGURATION_CHANGE -> {updateFragmentState(true)}
-            ViewIntents.START_FRAGMENT -> {updateFragmentState(false)}
+            ViewIntents.CONFIGURATION_CHANGE -> updateFragmentState(true)
+            ViewIntents.START_FRAGMENT -> updateFragmentState(false)
+            ViewIntents.GET_FAVORITES -> getFavoriteRestaurants()
+            ViewIntents.UPDATE_FAVORITE -> updateFavoriteRestaurants(selectedRestaurant)
         }
     }
 
@@ -99,6 +105,26 @@ class YelpViewModel @Inject constructor(
 
     private fun updateFragmentState(state: Boolean){
         _fragmentState.postValue(state)
+    }
+
+    private fun updateFavoriteRestaurants(restaurant: Restaurant?){
+        try {
+            yelpUseCases.updateFavorite(restaurant)
+        } catch (e: Exception){
+            Log.e(TAG, "updateFavoriteRestaurants: ${e.localizedMessage}", e)
+        }
+    }
+
+    private fun getFavoriteRestaurants(){
+        try {
+            viewModelScope.launch {
+                yelpUseCases.getFavoriteRestaurants().collect{
+                    _favoriteRestaurants.postValue(it)
+                }
+            }
+        } catch (e: Exception){
+            _favoriteRestaurants.postValue(UIState.ERROR(e))
+        }
     }
 
 }

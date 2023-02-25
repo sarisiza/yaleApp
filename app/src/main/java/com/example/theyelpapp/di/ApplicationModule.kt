@@ -5,14 +5,12 @@ import android.content.Context
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import androidx.room.Room
+import com.example.theyelpapp.datalayer.database.LocalRepository
 import com.example.theyelpapp.datalayer.database.RestaurantDatabase
 import com.example.theyelpapp.datalayer.database.RestaurantsDAO
 import com.example.theyelpapp.datalayer.location.LocationRepository
 import com.example.theyelpapp.datalayer.service.NetworkRepository
-import com.example.theyelpapp.usecaseslayer.GetLocationUseCase
-import com.example.theyelpapp.usecaseslayer.GetRatingsUseCase
-import com.example.theyelpapp.usecaseslayer.GetRestaurantsUseCase
-import com.example.theyelpapp.usecaseslayer.YelpUseCases
+import com.example.theyelpapp.usecaseslayer.*
 import com.example.theyelpapp.utils.NetworkState
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -46,13 +44,16 @@ class ApplicationModule {
     @Singleton
     fun providesYelpUseCases(
         locationRepository: LocationRepository,
+        localRepository: LocalRepository,
         networkRepository: NetworkRepository,
         networkState: NetworkState
     ): YelpUseCases =
         YelpUseCases(
             GetLocationUseCase(locationRepository),
             GetRatingsUseCase(networkRepository,networkState),
-            GetRestaurantsUseCase(networkRepository,networkState)
+            GetRestaurantsUseCase(networkRepository,networkState),
+            UpdateFavoritesUseCase(localRepository),
+            GetFavoriteRestaurants(localRepository)
         )
 
     @Provides
