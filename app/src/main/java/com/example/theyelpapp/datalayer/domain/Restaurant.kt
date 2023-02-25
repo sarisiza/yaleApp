@@ -1,6 +1,7 @@
 package com.example.theyelpapp.datalayer.domain
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.theyelpapp.datalayer.model.restaurant.Businesses
 
 /**
@@ -9,6 +10,7 @@ import com.example.theyelpapp.datalayer.model.restaurant.Businesses
 
 @Entity
 data class Restaurant(
+    @PrimaryKey
     val id: String = "",
     val latitude: Double = 0.0,
     val longitude: Double = 0.0,

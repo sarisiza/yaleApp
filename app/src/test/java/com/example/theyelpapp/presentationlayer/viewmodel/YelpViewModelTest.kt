@@ -48,10 +48,8 @@ class YelpViewModelTest {
     @Test
     fun `get user location when location use case gets a location returns a success state`(){
         //ASSIGN
-        testObject.locationEnabled = true
         testObject.locationPermissionEnabled = true
         every { mockUseCases.getLocation(
-            true,
             true) } returns flowOf(
                 UIState.SUCCESS(mockk())
             )

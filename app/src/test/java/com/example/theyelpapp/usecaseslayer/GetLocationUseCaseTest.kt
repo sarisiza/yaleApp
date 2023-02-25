@@ -1,9 +1,21 @@
 package com.example.theyelpapp.usecaseslayer
 
 import android.location.Location
+import com.example.theyelpapp.datalayer.location.LocationRepository
+import com.example.theyelpapp.utils.UIState
 import com.google.android.gms.location.FusedLocationProviderClient
 import io.mockk.clearAllMocks
+import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.mockk
+import junit.framework.TestCase.assertEquals
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
 
 import org.junit.After
 import org.junit.Before
@@ -12,36 +24,44 @@ import org.junit.Test
 class GetLocationUseCaseTest {
 
     private lateinit var testObject: GetLocationUseCase
-    private val mockFusedLocation =
-        mockk<FusedLocationProviderClient>(relaxed = true)
-    private var mockLocation = mockk<Location>(relaxed= true)
+    private var mockLocationRepository =
+        mockk<LocationRepository>(relaxed = true)
+
+    private val testDispatcher = UnconfinedTestDispatcher()
+    private val testScope = TestScope(testDispatcher)
 
     @Before
     fun setUp() {
-        testObject = GetLocationUseCase(mockFusedLocation)
+        Dispatchers.setMain(testDispatcher)
+        testObject = GetLocationUseCase(mockLocationRepository)
     }
 
     @After
     fun tearDown() {
+        Dispatchers.resetMain()
         clearAllMocks()
     }
 
     @Test
-    fun `get location use case returns a location when permission is enabled and location is on`(){
+    fun `get location use case returns a location when location repository returns a location is a success`(){
         //ASSIGN
-        mockFusedLocation.setMockMode(true)
-        mockLocation.apply {
-            latitude = 33.906857
-            longitude = -84.4697653
+        every { mockLocationRepository.getLocationData() } returns mockk{
+            every { latitude } returns 67.9754
+            every { longitude } returns -123.457
         }
-        mockFusedLocation.setMockLocation(mockLocation)
 
         //ACTION
-        val currentLocation = testObject(true,true)
+        val state = mutableListOf<UIState<Location>>()
+        val job = testScope.launch {
+            testObject(true).collect{
+                state.add(it)
+            }
+        }
 
         //ASSERT
-        //assertEquals(currentLocation?.latitude, mockLocation.latitude)
-        //assertEquals(currentLocation?.longitude,mockLocation.longitude)
+        assertEquals(2,state.size)
+        assert(state[1] is UIState.SUCCESS)
+        assertEquals(-123.457,(state[1] as UIState.SUCCESS).response.longitude)
 
     }
 
