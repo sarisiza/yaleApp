@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="@string/it_title_search"
+        android:id="@+id/frag_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_search_24"/>
+
+    <item
+        android:id="@+id/frag_favorite"
+        android:title="@string/it_title_favorites"
+        android:enabled="true"
+        android:icon="@drawable/ic_star_border_24"/>
+
+</menu>

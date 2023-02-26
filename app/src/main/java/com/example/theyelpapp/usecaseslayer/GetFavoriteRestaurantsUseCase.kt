@@ -8,10 +8,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class GetFavoriteRestaurants @Inject constructor(
+class GetFavoriteRestaurantsUseCase @Inject constructor(
     private val localRepository: LocalRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
