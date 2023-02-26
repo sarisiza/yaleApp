@@ -5,5 +5,5 @@ data class YelpUseCases(
     val getRatings: GetRatingsUseCase,
     val getRestaurants: GetRestaurantsUseCase,
     val updateFavorite: UpdateFavoritesUseCase,
-    val getFavoriteRestaurants: GetFavoriteRestaurants
+    val getFavoriteRestaurants: GetFavoriteRestaurantsUseCase
 )

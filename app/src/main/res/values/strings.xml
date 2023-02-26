@@ -14,4 +14,6 @@
     <string name="tv_text_user_name">User name</string>
     <string name="tv_text_user_rating">The rating of the user</string>
     <string name="tv_text_time_created">Time created</string>
+    <string name="it_title_search">Search</string>
+    <string name="it_title_favorites">Favorites</string>
 </resources>

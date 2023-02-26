@@ -53,7 +53,7 @@ class ApplicationModule {
             GetRatingsUseCase(networkRepository,networkState),
             GetRestaurantsUseCase(networkRepository,networkState),
             UpdateFavoritesUseCase(localRepository),
-            GetFavoriteRestaurants(localRepository)
+            GetFavoriteRestaurantsUseCase(localRepository)
         )
 
     @Provides

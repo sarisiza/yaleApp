@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.frag_container) as NavHostFragment
         //Navigation between fragments
         setupActionBarWithNavController(navHost.navController)
+        binding.bnvMenu.setupWithNavController(navHost.navController)
 
     }
 

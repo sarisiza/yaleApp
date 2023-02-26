@@ -38,4 +38,15 @@
             app:destination="@id/frag_det" />
     </fragment>
 
+    <fragment
+        android:id="@+id/frag_favorite"
+        android:name="com.example.theyelpapp.presentationlayer.view.FavoriteFragment"
+        tools:layout="@layout/fragment_restaurants_list"
+        android:label="Favorite Restaurants">
+
+        <action
+            android:id="@+id/action_frag_favorite_to_frag_det"
+            app:destination="@id/frag_det" />
+    </fragment>
+
 </navigation>
