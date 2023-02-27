@@ -9,9 +9,9 @@ private const val TAG = "LocalRepository"
 
 interface LocalRepository {
 
-    fun insertFavorite(restaurant: Restaurant)
+    suspend fun insertFavorite(restaurant: Restaurant)
 
-    fun deleteFavorite(restaurant: Restaurant)
+    suspend fun deleteFavorite(restaurant: Restaurant)
 
     suspend fun getFavorites(): UIState<List<Restaurant>>
 
@@ -23,7 +23,7 @@ class LocalRepositoryImpl @Inject constructor(
     private val restaurantsDAO: RestaurantsDAO
 ): LocalRepository{
 
-    override fun insertFavorite(restaurant: Restaurant) {
+    override suspend fun insertFavorite(restaurant: Restaurant) {
         try {
             restaurantsDAO.insertFavorite(restaurant)
         }catch (e: Exception){
@@ -31,7 +31,7 @@ class LocalRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun deleteFavorite(restaurant: Restaurant) {
+    override suspend fun deleteFavorite(restaurant: Restaurant) {
         try{
             restaurantsDAO.deleteFavorite(restaurant)
         }catch (e: Exception){

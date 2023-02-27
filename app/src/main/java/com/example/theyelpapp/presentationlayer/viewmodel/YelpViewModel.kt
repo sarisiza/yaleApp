@@ -109,7 +109,9 @@ class YelpViewModel @Inject constructor(
 
     private fun updateFavoriteRestaurants(restaurant: Restaurant?){
         try {
-            yelpUseCases.updateFavorite(restaurant)
+            viewModelScope.launch {
+                yelpUseCases.updateFavorite(restaurant)
+            }
         } catch (e: Exception){
             Log.e(TAG, "updateFavoriteRestaurants: ${e.localizedMessage}", e)
         }

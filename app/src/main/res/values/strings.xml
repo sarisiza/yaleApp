@@ -16,4 +16,5 @@
     <string name="tv_text_time_created">Time created</string>
     <string name="it_title_search">Search</string>
     <string name="it_title_favorites">Favorites</string>
+    <string name="ib_desc_favorite">Favorite</string>
 </resources>

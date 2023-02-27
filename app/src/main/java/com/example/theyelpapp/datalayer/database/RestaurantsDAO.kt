@@ -7,10 +7,10 @@ import com.example.theyelpapp.datalayer.domain.Restaurant
 interface RestaurantsDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavorite(vararg restaurant: Restaurant)
+    suspend fun insertFavorite(vararg restaurant: Restaurant)
 
     @Delete
-    fun deleteFavorite(vararg restaurant: Restaurant)
+    suspend fun deleteFavorite(vararg restaurant: Restaurant)
 
     @Query("SELECT * FROM Restaurant")
     suspend fun getFavoriteRestaurants(): List<Restaurant>

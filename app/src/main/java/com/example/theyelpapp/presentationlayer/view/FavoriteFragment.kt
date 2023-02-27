@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.theyelpapp.R
 import com.example.theyelpapp.databinding.FragmentRestaurantsListBinding
 import com.example.theyelpapp.presentationlayer.adapters.RestaurantAdapter
@@ -26,6 +27,8 @@ class FavoriteFragment : BaseFragment() {
         }
     }
 
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +45,14 @@ class FavoriteFragment : BaseFragment() {
             )
         }
 
+        swipeRefreshLayout = binding.swipeLayout
+
         updateList()
+
+        swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing = false
+            yelpViewModel.getIntentView(ViewIntents.GET_FAVORITES)
+        }
 
         // Inflate the layout for this fragment
         return binding.root
@@ -58,7 +68,6 @@ class FavoriteFragment : BaseFragment() {
     }
 
     private fun updateList(){
-
         yelpViewModel.favoriteRestaurants.observe(viewLifecycleOwner){state ->
             when(state){
                 is UIState.ERROR -> {
