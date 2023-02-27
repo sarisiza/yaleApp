@@ -1,6 +1,7 @@
 package com.example.theyelpapp.presentationlayer.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,13 @@ import com.example.theyelpapp.databinding.RestaurantFragmentBinding
 import com.example.theyelpapp.utils.ViewIntents
 import com.squareup.picasso.Picasso
 
+private const val TAG = "RestaurantFragment"
 class RestaurantFragment : BaseFragment() {
 
     private val binding by lazy {
         RestaurantFragmentBinding.inflate(layoutInflater)
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +36,8 @@ class RestaurantFragment : BaseFragment() {
             .error(R.drawable.ic_broken_image_24)
             .into(binding.ivRestaurantImage)
 
+        checkFavorite()
+
         binding.inBar.barDetailsBar.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.frag_ratings -> {
@@ -44,7 +49,24 @@ class RestaurantFragment : BaseFragment() {
             }
         }
 
+        binding.ibStarFav.setOnClickListener {
+            yelpViewModel.getIntentView(ViewIntents.UPDATE_FAVORITE)
+            checkFavorite()
+        }
+
         return binding.root
+    }
+
+    private fun checkFavorite(){
+        yelpViewModel.selectedRestaurant?.isFavorite?.let {
+            if(it){
+                Log.d(TAG, "checkFavorite: is filled")
+                binding.ibStarFav.setImageResource(R.drawable.baseline_star_filled_24)
+            } else{
+                Log.d(TAG, "checkFavorite: is empty")
+                binding.ibStarFav.setImageResource(R.drawable.baseline_star_empty_24)
+            }
+        } ?: binding.ibStarFav.setImageResource(R.drawable.baseline_star_empty_24)
     }
 
 }

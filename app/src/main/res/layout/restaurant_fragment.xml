@@ -32,6 +32,17 @@
             android:textStyle="bold"
             android:layout_margin="10dp"/>
 
+        <ImageButton
+            android:id="@+id/ib_star_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tv_restaurant_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_restaurant_name"
+            android:src="@drawable/baseline_star_empty_24"
+            android:background="@color/green_bg"
+            android:contentDescription="@string/ib_desc_favorite"/>
+
         <TextView
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
